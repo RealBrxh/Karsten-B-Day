@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday!</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #121212;
+        color: #e0e0e0;
+        text-align: center;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
+
+      h1 {
+        font-size: 3rem;
+        color: #ff4655;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .birthday-image {
+        max-width: 100%;
+        height: auto;
+        margin: 20px 0;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(255, 70, 85, 0.3);
+      }
+
+      .small-button {
+        display: inline-block;
+        background-color: #b01930;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        margin-top: 10px;
+        transition: background-color 0.3s;
+      }
+
+      .small-button:hover {
+        background-color: #d62e40;
+      }
+
+      .gift-button {
+        display: inline-block;
+        background-color: #ff4655;
+        color: white;
+        padding: 15px 30px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-size: 1.5rem;
+        margin-top: 40px;
+        transition: all 0.3s;
+        box-shadow: 0 4px 15px rgba(255, 70, 85, 0.4);
+      }
+
+      .gift-button:hover {
+        background-color: #ff6b77;
+        transform: scale(1.05);
+      }
+
+      /* Gift page styles */
+      .gift-container {
+        margin-top: 60px;
+      }
+
+      .gift-box {
+        width: 200px;
+        height: 200px;
+        background-color: #b01930;
+        margin: 0 auto;
+        position: relative;
+        cursor: pointer;
+        transition: all 0.5s;
+        border-radius: 10px;
+      }
+
+      .gift-lid {
+        width: 220px;
+        height: 40px;
+        background-color: #d62e40;
+        position: absolute;
+        top: -20px;
+        left: -10px;
+        border-radius: 5px;
+        transition: all 0.5s;
+      }
+
+      .gift-ribbon {
+        width: 30px;
+        height: 200px;
+        background-color: #ff6b77;
+        position: absolute;
+        left: 85px;
+        top: 0;
+        z-index: 2;
+        transition: all 0.5s;
+      }
+
+      .gift-ribbon-horizontal {
+        width: 200px;
+        height: 30px;
+        background-color: #ff6b77;
+        position: absolute;
+        left: 0;
+        top: 85px;
+        z-index: 3;
+        transition: all 0.5s;
+      }
+
+      .gift-message {
+        display: none;
+        margin-top: 40px;
+        padding: 20px;
+        background-color: #1e1e1e;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(255, 70, 85, 0.2);
+      }
+
+      .back-button {
+        display: inline-block;
+        background-color: #b01930;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 20px;
+        text-decoration: none;
+        margin-top: 40px;
+        transition: background-color 0.3s;
+      }
+
+      .back-button:hover {
+        background-color: #d62e40;
+      }
+
+      /* Modal styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 10;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+      }
+
+      .modal-content {
+        background-color: #1e1e1e;
+        margin: 10% auto;
+        padding: 20px;
+        width: 80%;
+        max-width: 600px;
+        border-radius: 10px;
+        text-align: left;
+      }
+
+      .close {
+        color: #888;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .close:hover {
+        color: #ff4655;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Home Page -->
+    <div id="home-page" class="container">
+      <h1>Happy Birthday!</h1>
+      <p>Wishing you the most amazing year full of amazing adventures!</p>
+
+      <!-- Image -->
+      <img src="Karsten F1.png" alt="Birthday Image" class="birthday-image" />
+
+      <div>
+        <button class="small-button" onclick="openModal()">
+          How I made it
+        </button>
+      </div>
+
+      <a href="#gift-page" class="gift-button" onclick="showGiftPage()"
+        >Click for your gift!</a
+      >
+    </div>
+
+    <!-- Gift Page -->
+    <div id="gift-page" class="container" style="display: none">
+      <h1>Your Special Gift</h1>
+      <p>Click the gift box a few times to unwrap it!</p>
+
+      <div class="gift-container">
+        <div class="gift-box" onclick="unwrapGift()" id="gift-box">
+          <div class="gift-lid" id="gift-lid"></div>
+          <div class="gift-ribbon" id="gift-ribbon"></div>
+          <div class="gift-ribbon-horizontal" id="gift-ribbon-horizontal"></div>
+        </div>
+
+        <div class="gift-message" id="gift-message">
+          <h2>Surprise!</h2>
+          <p>Wishing you all the happiness in the world on your special day!</p>
+          <p>
+            Your gift is:
+            <strong>2 Rounds of Karting on me at any venue you want</strong>
+            (after you heal from your surgery)!! I was thinking maybe the
+            karting at Spa?
+          </p>
+          <p>Here's to another amazing year ahead!</p>
+        </div>
+      </div>
+
+      <a href="#home-page" class="back-button" onclick="showHomePage()"
+        >Back to Home</a
+      >
+    </div>
+
+    <!-- Modal -->
+    <div id="howModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>How I Made This</h2>
+        <p>
+          I wanted to create something special for your birthday with my new
+          found knowledge in making websites, so I put together this little
+          website to celebrate you!
+        </p>
+        <p>
+          I used HTML, CSS, and JavaScript to build it, and the image was
+          created with incredible patience in photoshop haha.
+        </p>
+        <p>Hope you enjoy the website!</p>
+      </div>
+    </div>
+
+    <script>
+      // Click counter for gift unwrapping
+      let clickCount = 0;
+
+      // Show gift page
+      function showGiftPage() {
+        document.getElementById("home-page").style.display = "none";
+        document.getElementById("gift-page").style.display = "block";
+        // Reset gift if they come back
+        resetGift();
+      }
+
+      // Show home page
+      function showHomePage() {
+        document.getElementById("gift-page").style.display = "none";
+        document.getElementById("home-page").style.display = "block";
+      }
+
+      // Unwrap gift step by step
+      function unwrapGift() {
+        clickCount++;
+
+        if (clickCount === 1) {
+          // First click: Move the lid
+          document.getElementById("gift-lid").style.transform =
+            "translateY(-60px) translateX(20px) rotate(20deg)";
+        } else if (clickCount === 2) {
+          // Second click: Move the vertical ribbon
+          document.getElementById("gift-ribbon").style.transform =
+            "translateX(-60px) rotate(20deg)";
+          document.getElementById("gift-ribbon-horizontal").style.transform =
+            "translateY(60px) rotate(-20deg)";
+        } else if (clickCount === 3) {
+          // Third click: Open the box and reveal message
+          document.getElementById("gift-box").style.transform =
+            "scale(0.5) rotate(20deg) translateX(100px)";
+          document.getElementById("gift-box").style.opacity = "0.5";
+          document.getElementById("gift-message").style.display = "block";
+        }
+      }
+
+      // Reset gift box to initial state
+      function resetGift() {
+        clickCount = 0;
+        document.getElementById("gift-lid").style.transform = "none";
+        document.getElementById("gift-ribbon").style.transform = "none";
+        document.getElementById("gift-ribbon-horizontal").style.transform =
+          "none";
+        document.getElementById("gift-box").style.transform = "none";
+        document.getElementById("gift-box").style.opacity = "1";
+        document.getElementById("gift-message").style.display = "none";
+      }
+
+      // Open modal
+      function openModal() {
+        document.getElementById("howModal").style.display = "block";
+      }
+
+      // Close modal
+      function closeModal() {
+        document.getElementById("howModal").style.display = "none";
+      }
+
+      // Close modal if clicked outside
+      window.onclick = function (event) {
+        let modal = document.getElementById("howModal");
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+    </script>
+  </body>
+</html>
